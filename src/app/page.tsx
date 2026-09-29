@@ -184,7 +184,7 @@ export default function Home() {
             style={{ animationDelay: "400ms" }}
           >
             <PresenceFacepile users={djUsers} max={5} />
-            <p className="text-sm text-paper/60">Verified DJs already digging the crates</p>
+            <p className="text-sm text-paper/60">Made for DJs digging the crates</p>
           </div>
 
           {/* Stat strip — trust signals, count up on scroll into view */}
