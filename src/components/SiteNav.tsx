@@ -123,7 +123,8 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
                   onClick={() => setOpenGroup(open ? null : group.id)}
                   className="flex w-full items-center justify-between py-5 text-left"
                 >
-                  <span className="font-mono text-xs uppercase tracking-[0.22em] text-paper/60">
+                  {/* 2026-09-29 Round 2: main links big display type, sub items smaller */}
+                  <span className="font-display text-3xl tracking-tight text-paper">
                     {group.label}
                   </span>
                   <Chevron open={open} />
@@ -134,15 +135,15 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
                     open ? "grid-rows-[1fr] pb-5 opacity-100" : "grid-rows-[0fr] opacity-0"
                   )}
                 >
-                  <ul className="min-h-0 overflow-hidden">
+                  <ul className="min-h-0 space-y-1 overflow-hidden">
                     {group.links.map((l) => (
                       <li key={l.href + l.label}>
                         <Link
                           href={l.href}
                           onClick={onClose}
-                          className="flex items-center gap-3 py-3 text-2xl font-bold text-paper transition-colors hover:text-brand-400"
+                          className="flex items-center gap-2.5 py-2 text-base font-medium text-paper/65 transition-colors hover:text-brand-400"
                         >
-                          <Motif className="h-3 w-3 text-brand-500" />
+                          <Motif className="h-2.5 w-2.5 text-brand-500" />
                           {l.label}
                         </Link>
                       </li>
@@ -208,14 +209,14 @@ export function SiteNav() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="text-sm font-medium text-paper/70 transition-colors hover:text-paper"
+                className="text-[15px] font-semibold text-paper/70 transition-colors hover:text-paper"
               >
                 {l.label}
               </Link>
             ))}
             <Link
               href="/login"
-              className="text-sm font-medium text-paper/70 transition-colors hover:text-paper"
+              className="text-[15px] font-semibold text-paper/70 transition-colors hover:text-paper"
             >
               Sign in
             </Link>

@@ -3,13 +3,13 @@
 // CLIENT/wingu/wingu-google-app-logo.png to public/logos/wingu-icon.png).
 import Image from "next/image";
 
-export function WinguCredit({ className = "" }: { className?: string }) {
+export function WinguCredit({ className = "", tone = "light" }: { className?: string; tone?: "light" | "dark" }) {
   return (
     <a
       href="https://wingudigital.com"
       target="_blank"
       rel="noopener"
-      className={`group inline-flex items-center gap-2 text-xs text-ink-soft/70 transition-colors hover:text-ink ${className}`}
+      className={`group inline-flex items-center gap-2 text-xs transition-colors ${tone === "dark" ? "text-paper/55 hover:text-paper" : "text-ink-soft/70 hover:text-ink"} ${className}`}
       aria-label="Built by Wingu Digital"
     >
       <span>Built by</span>

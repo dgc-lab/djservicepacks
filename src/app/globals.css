@@ -30,6 +30,66 @@
   /* Charcoal (deep warm black for dark sections) */
   --color-charcoal: #14120e;
   --color-charcoal-soft: #1e1b15;
+
+  /* GodUI token bridge — maps GodUI component tokens onto the warm dark
+     brand palette so harvested components render on-brand without the
+     full GodUI theme import. (No existing site code uses these token
+     names — only the godui/ components — so remapping background/
+     foreground here is safe.) */
+  --color-background: #14120e;
+  --color-foreground: #faf9f6;
+  --color-card: #1e1b15;
+  --color-card-foreground: #faf9f6;
+  --color-popover: #1e1b15;
+  --color-popover-foreground: #faf9f6;
+  --color-primary: #f0a821;
+  --color-primary-foreground: #14120e;
+  --color-secondary: #2a251c;
+  --color-secondary-foreground: #faf9f6;
+  --color-muted: #221e17;
+  --color-muted-foreground: #a89e8d;
+  --color-accent: #2a251c;
+  --color-accent-foreground: #faf9f6;
+  --color-border: #38322a;
+  --color-ring: #f0a821;
+  --z-index-base: 0;
+  --z-index-raised: 10;
+  --z-index-popover: 50;
+
+  /* GodUI animation tokens */
+  --animate-aurora-text: aurora-text var(--aurora-text-speed, 10s) infinite linear;
+  --animate-magic-rainbow: magic-rainbow var(--rainbow-speed, 2s) infinite linear;
+
+  /* Warm rainbow stops for the magic-tab rainbow edge */
+  --rainbow-1: #fbbf24;
+  --rainbow-2: #f59e0b;
+  --rainbow-3: #fb923c;
+  --rainbow-4: #f43f5e;
+  --rainbow-5: #fcd34d;
+
+  /* GodUI button sizing tokens (used by magic-tab) */
+  --button-px-sm: 0.75rem;
+  --button-py-sm: 0.375rem;
+  --button-text-sm: 0.75rem;
+  --button-leading-sm: 1rem;
+  --button-px-md: 1rem;
+  --button-py-md: 0.5rem;
+  --button-text-md: 0.875rem;
+  --button-leading-md: 1.25rem;
+  --button-px-lg: 1.5rem;
+  --button-py-lg: 0.75rem;
+  --button-text-lg: 1rem;
+  --button-leading-lg: 1.5rem;
+}
+
+@keyframes aurora-text {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes magic-rainbow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
 }
 
 :root {
@@ -43,7 +103,33 @@ body {
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* 2026-09-29 Round 1 (V3 dialed-in): motion + polish layer */
+/* 2026-09-29 Round 2: bottom-sheet dialog entrance */
+@keyframes sheet-up {
+  from {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-sheet-up {
+  animation: sheet-up 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-sheet-up {
+    animation: none;
+  }
+}
+/* 2026-09-29 Round 2: dark amber/charcoal section treatment — no white sections.
+   Warm radial amber glow over a deep charcoal gradient. */
+.section-dark {
+  background:
+    radial-gradient(1100px 480px at 85% -10%, rgba(240, 168, 33, 0.13), transparent 60%),
+    radial-gradient(800px 420px at 8% 110%, rgba(240, 168, 33, 0.07), transparent 55%),
+    linear-gradient(165deg, #221c12 0%, #14120e 55%, #0f0d09 100%);
+}
 html {
   scroll-behavior: smooth;
 }

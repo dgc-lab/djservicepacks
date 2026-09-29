@@ -49,14 +49,14 @@ export async function LatestReleases() {
   if (releases.length === 0) return null;
 
   return (
-    <section className="border-b border-ink/10 bg-paper-dark">
+    <section className="section-dark border-b border-paper/10 text-paper">
       <div className="mx-auto max-w-6xl px-6 py-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-600">Fresh in the crate</p>
-            <h2 className="mt-3 text-3xl font-black leading-tight text-ink sm:text-4xl">Latest releases</h2>
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-400">Fresh in the crate</p>
+            <h2 className="mt-3 text-3xl font-black leading-tight text-paper sm:text-4xl">Latest releases</h2>
           </div>
-          <Link href="/releases" className="text-sm font-semibold text-brand-700 hover:text-brand-600">
+          <Link href="/releases" className="text-sm font-semibold text-brand-400 hover:text-brand-300">
             Browse all packs →
           </Link>
         </div>
@@ -66,7 +66,7 @@ export async function LatestReleases() {
             <li key={r.releaseId}>
               <Link
                 href={`/releases/${r.releaseId}`}
-                className="group block overflow-hidden rounded-lg border border-ink/10 bg-white transition-shadow hover:shadow-md"
+                className="group block overflow-hidden rounded-lg border border-paper/10 bg-paper/[0.04] transition-all hover:-translate-y-0.5 hover:border-brand-500/40"
               >
                 <div className="relative aspect-square bg-charcoal">
                   {r.hasCover ? (
@@ -86,9 +86,9 @@ export async function LatestReleases() {
                   )}
                 </div>
                 <div className="p-3">
-                  <p className="truncate text-sm font-bold text-ink">{r.songTitle}</p>
-                  <p className="truncate text-xs text-ink-soft">{r.artistName}</p>
-                  <p className="mt-1 truncate text-xs text-ink/50">
+                  <p className="truncate text-sm font-bold text-paper">{r.songTitle}</p>
+                  <p className="truncate text-xs text-paper/60">{r.artistName}</p>
+                  <p className="mt-1 truncate text-xs text-paper/40">
                     {[r.genre.join(", "), r.bpm ? `${r.bpm} BPM` : "", `${r.trackCount} edit${r.trackCount === 1 ? "" : "s"}`]
                       .filter(Boolean)
                       .join(" · ")}

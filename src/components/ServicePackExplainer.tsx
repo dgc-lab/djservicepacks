@@ -26,7 +26,7 @@ export function ServicePackExplainer() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline-flex h-12 items-center justify-center rounded-md border-2 border-brand-500 px-6 text-base font-semibold text-brand-700 transition-colors hover:bg-brand-500/10"
+        className="inline-flex h-12 items-center justify-center rounded-md border-2 border-brand-500 px-6 text-base font-semibold text-brand-400 transition-colors hover:bg-brand-500/10"
       >
         What is a service pack?
       </button>
