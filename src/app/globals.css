@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+/*
+  DJ Service Packs — brand theme.
+  Warm, label-industry palette: ink, paper, and a single gold accent.
+  Deliberately NOT the generic indigo/violet SaaS look.
+*/
+@theme inline {
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Brand accent — warm gold */
+  --color-brand-300: #f8cf6e;
+  --color-brand-400: #f6bb45;
+  --color-brand-500: #f0a821;
+  --color-brand-600: #d9920f;
+  --color-brand-700: #b5760a;
+
+  /* Ink (near-black, warm) */
+  --color-ink: #0f0e0b;
+  --color-ink-soft: #3a382f;
+
+  /* Paper (warm off-white) */
+  --color-paper: #faf9f6;
+  --color-paper-dark: #f1eee7;
+
+  /* Charcoal (deep warm black for dark sections) */
+  --color-charcoal: #14120e;
+  --color-charcoal-soft: #1e1b15;
+}
+
+:root {
+  --paper: #faf9f6;
+  --ink: #0f0e0b;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}

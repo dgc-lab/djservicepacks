@@ -1,0 +1,38 @@
+{
+  "name": "djservicepacks",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:plesk": "\"$npm_node_execpath\" node_modules/next/dist/bin/next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1113.0",
+    "@aws-sdk/s3-request-presigner": "^3.1113.0",
+    "firebase": "^12.17.1",
+    "firebase-admin": "^13.10.0",
+    "imapflow": "^2.1.2",
+    "mailparser": "^3.9.31",
+    "next": "16.3.1",
+    "nodemailer": "^10.0.12",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "stripe": "^22.6.2",
+    "wavesurfer.js": "^7.12.11"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/mailparser": "^3.4.6",
+    "@types/node": "^20",
+    "@types/nodemailer": "^8.0.2",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
