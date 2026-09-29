@@ -180,7 +180,7 @@ const FilterBar = React.forwardRef<HTMLDivElement, FilterBarProps>(
                     setQuery("");
                     setOpen(isOpen ? null : facet.id);
                   }}
-                  className="flex items-center gap-1.5 rounded-full py-1.5 pr-2 pl-3 font-medium text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="flex min-h-[44px] touch-manipulation items-center gap-2 rounded-full px-4 font-medium text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <AnimatePresence initial={false}>
                     {!hasSelection && (
@@ -247,7 +247,7 @@ const FilterBar = React.forwardRef<HTMLDivElement, FilterBarProps>(
                       transition={spring}
                       onClick={() => clearFacet(facet.id)}
                       aria-label={`Clear ${facet.label}`}
-                      className="mr-1 flex h-6 w-6 items-center justify-center rounded-full text-muted-foreground [transition:background-color_150ms_ease,color_150ms_ease] hover:bg-foreground/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                      className="mr-1.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted-foreground [transition:background-color_150ms_ease,color_150ms_ease] hover:bg-foreground/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       {CloseIcon}
                     </motion.button>
@@ -280,7 +280,7 @@ const FilterBar = React.forwardRef<HTMLDivElement, FilterBarProps>(
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder={`Search ${facet.label.toLowerCase()}…`}
-                        className="mb-1 w-full rounded-lg border border-border bg-muted px-3 py-1.5 text-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                        className="mb-1.5 h-11 w-full rounded-lg border border-border bg-muted px-3 text-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
                       />
                     )}
                     <ul className="max-h-60 overflow-y-auto">
@@ -298,7 +298,7 @@ const FilterBar = React.forwardRef<HTMLDivElement, FilterBarProps>(
                               role="option"
                               aria-selected={checked}
                               onClick={() => toggleOption(facet.id, opt.value)}
-                              className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm [transition:background-color_150ms_ease] hover:bg-accent"
+                              className="flex min-h-[44px] w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm [transition:background-color_150ms_ease] hover:bg-accent"
                             >
                               <span
                                 className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border [transition:background-color_150ms_ease,border-color_150ms_ease] ${
@@ -353,7 +353,7 @@ const FilterBar = React.forwardRef<HTMLDivElement, FilterBarProps>(
               exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.9 }}
               transition={spring}
               onClick={clearAll}
-              className="rounded-full px-2.5 py-1.5 font-medium text-muted-foreground text-sm underline-offset-4 [transition:color_150ms_ease] hover:text-foreground hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+              className="min-h-[44px] rounded-full px-3 font-medium text-muted-foreground text-sm underline-offset-4 [transition:color_150ms_ease] hover:text-foreground hover:underline focus-visible:ring-2 focus-visible:ring-ring"
             >
               Clear all
             </motion.button>

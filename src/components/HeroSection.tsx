@@ -2,7 +2,6 @@
 
 // 2026-09-29 Round 4: hero with background image slider + a settings gear that
 // opens live controls for headline typography and slider behavior.
-import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Settings2, X } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -14,6 +13,7 @@ import { SponsorCredit } from "@/components/SponsorCredit";
 import { AuroraText } from "@/components/godui/aurora-text";
 import { PresenceFacepile, type PresenceUser } from "@/components/godui/presence/presence-facepile";
 import { HeroSlider, type HeroSlide } from "@/components/HeroSlider";
+import { OnboardingModal, type OnboardingKind } from "@/components/onboarding/OnboardingModal";
 
 const slides: HeroSlide[] = [
   { src: "/images/hero-slider/slider-crates.webp", alt: "", label: "The crates" },
@@ -54,6 +54,9 @@ export function HeroSection() {
   const [headlineSize, setHeadlineSize] = useState<HeadlineSize>("classic");
   const [autoplay, setAutoplay] = useState(true);
   const [speedId, setSpeedId] = useState<(typeof SPEEDS)[number]["id"]>("steady");
+  // 2026-09-29 Round 9: hero CTAs pop the onboarding forms in a modal over the
+  // dark hero instead of navigating away to a separate page.
+  const [onboarding, setOnboarding] = useState<OnboardingKind | null>(null);
 
   useEffect(() => {
     if (!settingsOpen) return;
@@ -189,15 +192,16 @@ export function HeroSection() {
           className="animate-rise mt-10 flex flex-wrap items-center gap-4"
           style={{ animationDelay: "270ms" }}
         >
-          <Button size="lg">
-            <Link href="/onboarding/artist">Get started as a label / artist</Link>
+          <Button size="lg" onClick={() => setOnboarding("artist")}>
+            Get started as a label / artist
           </Button>
-          <Link
-            href="/onboarding/dj"
-            className="inline-flex h-12 items-center justify-center rounded-md border border-paper/25 px-6 text-base font-semibold text-paper transition-all hover:bg-paper/10 active:scale-[0.98]"
+          <button
+            type="button"
+            onClick={() => setOnboarding("dj")}
+            className="inline-flex h-12 touch-manipulation items-center justify-center rounded-md border border-paper/25 px-6 text-base font-semibold text-paper transition-all hover:bg-paper/10 active:scale-[0.98]"
           >
             DJ? Get verified — free
-          </Link>
+          </button>
         </div>
         <p
           className="animate-rise mt-6 text-sm text-paper/50"
@@ -231,6 +235,7 @@ export function HeroSection() {
         {/* 2026-09-28 21:35, sponsor credit */}
         <SponsorCredit tone="dark" className="mt-10 border-t border-paper/10 pt-6" />
       </div>
+      <OnboardingModal open={onboarding} onClose={() => setOnboarding(null)} />
     </section>
   );
 }
