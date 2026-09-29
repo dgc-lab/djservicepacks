@@ -164,3 +164,19 @@ html {
     animation: none;
   }
 }
+/* 2026-09-29 Round 3 — glowing scroll-progress rail on the timeline.
+   Targets the timeline's inner progress line (the motion.div that grows
+   with scaleY as you scroll) and gives it an aurora gradient + glow. */
+.timeline-glow [data-slot="scroll-timeline"] div.absolute.top-0 > div {
+  width: 3px;
+  left: -1px;
+  background: linear-gradient(to bottom, #f5b83d, #f0643c 55%, #e14e9a);
+  box-shadow:
+    0 0 10px 2px rgba(240, 168, 33, 0.75),
+    0 0 28px 6px rgba(240, 100, 60, 0.35);
+}
+@media (prefers-reduced-motion: reduce) {
+  .timeline-glow [data-slot="scroll-timeline"] div.absolute.top-0 > div {
+    box-shadow: none;
+  }
+}

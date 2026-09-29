@@ -11,7 +11,7 @@ import { ServicePackExplainer } from "@/components/ServicePackExplainer";
 import { LatestReleases } from "@/components/LatestReleases";
 import { WinguCredit } from "@/components/WinguCredit";
 import { SponsorCredit } from "@/components/SponsorCredit";
-import { Disc, Flame, Image as ImageIcon, Mic, Music2, Scissors } from "lucide-react";
+import { Disc, Flame, Image as ImageIcon, Mic, Music2, Scissors, type LucideIcon } from "lucide-react";
 import { AuroraText } from "@/components/godui/aurora-text";
 import { BentoCard, BentoGrid } from "@/components/godui/bento-grid";
 import { ScrollTimeline } from "@/components/godui/scroll-timeline";
@@ -96,15 +96,37 @@ const faqItems = [
 ];
 
 const djUsers: PresenceUser[] = [
-  { id: "mira", name: "DJ Mira", status: "active" },
-  { id: "kwest", name: "DJ Kwest", status: "active" },
-  { id: "luna", name: "DJ Luna", status: "typing" },
-  { id: "paco", name: "DJ Paco", status: "idle" },
-  { id: "sable", name: "DJ Sable", status: "active" },
-  { id: "rex", name: "DJ Rex", status: "active" },
-  { id: "nia", name: "DJ Nia", status: "offline" },
-  { id: "ozo", name: "DJ Ozo", status: "active" },
+  { id: "mira", name: "DJ Mira", avatar: "/images/djs/dj-mira.webp", status: "active" },
+  { id: "kwest", name: "DJ Kwest", avatar: "/images/djs/dj-kwest.webp", status: "active" },
+  { id: "luna", name: "DJ Luna", avatar: "/images/djs/dj-luna.webp", status: "typing" },
+  { id: "paco", name: "DJ Paco", avatar: "/images/djs/dj-paco.webp", status: "idle" },
 ];
+
+// 2026-09-29 Round 3: larger aurora-gradient icons for the pack-contents bento tiles.
+// The gradient def is rendered once per section; each icon strokes through it.
+function AuroraIcon({ icon: Icon }: { icon: LucideIcon }) {
+  return (
+    <Icon
+      className="h-7 w-7 [filter:drop-shadow(0_0_6px_rgba(240,168,33,0.55))]"
+      stroke="url(#djsp-aurora)"
+      strokeWidth={1.8}
+    />
+  );
+}
+
+function AuroraDefs() {
+  return (
+    <svg aria-hidden width="0" height="0" className="absolute">
+      <defs>
+        <linearGradient id="djsp-aurora" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#f5b83d" />
+          <stop offset="55%" stopColor="#f0643c" />
+          <stop offset="100%" stopColor="#e14e9a" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
 
 const stats = [
   { to: 6, label: "edits in every pack" },
@@ -233,6 +255,7 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal delay={120}>
+            <AuroraDefs />
             <BentoGrid columns={2}>
               <BentoCard
                 colSpan={2}
@@ -244,7 +267,7 @@ export default function Home() {
               {packTiles.map((t) => (
                 <BentoCard
                   key={t.title}
-                  icon={<t.icon className="h-5 w-5" />}
+                  icon={<AuroraIcon icon={t.icon} />}
                   title={t.title}
                   description={t.desc}
                 />
@@ -272,7 +295,9 @@ export default function Home() {
             </p>
           </Reveal>
           <div className="mt-4">
-            <ScrollTimeline data={timelineData} />
+            <div className="timeline-glow">
+              <ScrollTimeline data={timelineData} />
+            </div>
           </div>
         </div>
       </section>
