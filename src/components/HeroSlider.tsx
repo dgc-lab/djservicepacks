@@ -182,6 +182,9 @@ export function HeroSlider({
           ))}
         </div>
 
+        {/* Uniform dim over every slide — the moody treatment from the approved screenshots (2026-09-29 Round 12) */}
+        <div aria-hidden className="absolute inset-0 bg-black/40" />
+
         {/* Dip-to-black overlay */}
         <div aria-hidden className={cn("fx-dip", dipping && "is-dipping")} />
         {/* Film grain overlay */}
