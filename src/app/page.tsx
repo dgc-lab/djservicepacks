@@ -10,7 +10,6 @@ import { ServicePackExplainer } from "@/components/ServicePackExplainer";
 import { LatestReleases } from "@/components/LatestReleases";
 import { WinguCredit } from "@/components/WinguCredit";
 import { SponsorCredit } from "@/components/SponsorCredit";
-import { Disc, Flame, Image as ImageIcon, Mic, Music2, Scissors, type LucideIcon } from "lucide-react";
 import { AuroraText } from "@/components/godui/aurora-text";
 import { BentoCard, BentoGrid } from "@/components/godui/bento-grid";
 import { ScrollTimeline } from "@/components/godui/scroll-timeline";
@@ -23,15 +22,6 @@ import { CtaActions } from "@/components/CtaActions";
 
 // 2026-09-27 01:20, ISR for the Latest releases grid (also revalidated on publish)
 export const revalidate = 300;
-
-const packTiles = [
-  { icon: Disc, title: "Clean / radio edit", desc: "FCC-ready, no bleeps needed." },
-  { icon: Flame, title: "Dirty / explicit edit", desc: "The record as the artist intended." },
-  { icon: Music2, title: "Instrumental", desc: "For freestyles, beds and remixes." },
-  { icon: Mic, title: "Acapella", desc: "Clean & dirty vocals, mix-ready." },
-  { icon: Scissors, title: "Intro / outro edits", desc: "8 & 16 bar, built for the blend." },
-  { icon: ImageIcon, title: "EPK + cover art", desc: "High-res art and one-sheet attached." },
-];
 
 const timelineData = [
   {
@@ -93,32 +83,6 @@ const faqItems = [
   },
 ];
 
-// 2026-09-29 Round 3: larger aurora-gradient icons for the pack-contents bento tiles.
-// The gradient def is rendered once per section; each icon strokes through it.
-function AuroraIcon({ icon: Icon }: { icon: LucideIcon }) {
-  return (
-    <Icon
-      className="h-7 w-7 [filter:drop-shadow(0_0_6px_rgba(240,168,33,0.55))]"
-      stroke="url(#djsp-aurora)"
-      strokeWidth={1.8}
-    />
-  );
-}
-
-function AuroraDefs() {
-  return (
-    <svg aria-hidden width="0" height="0" className="absolute">
-      <defs>
-        <linearGradient id="djsp-aurora" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#f5b83d" />
-          <stop offset="55%" stopColor="#f0643c" />
-          <stop offset="100%" stopColor="#e14e9a" />
-        </linearGradient>
-      </defs>
-    </svg>
-  );
-}
-
 export default function Home() {
   return (
     <main className="flex-1">
@@ -132,11 +96,12 @@ export default function Home() {
         <LatestReleases />
       </div>
 
-      {/* What's in a service pack — 2026-09-29 Round 2: dark amber/charcoal, no white */}
-      <section id="standard" className="section-dark scroll-mt-20 text-paper">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 lg:grid-cols-2 lg:items-center">
+      {/* What's in a service pack — 2026-09-29 Round 7: the showcase band is the
+          main event now; formats card follows below */}
+      <section id="standard" className="section-dark scroll-mt-20 overflow-x-clip text-paper">
+        <div className="mx-auto max-w-6xl px-6 pt-20 text-center">
           {/* 2026-09-29 Round 4: centered header, aurora on the closing line */}
-          <Reveal className="text-center">
+          <Reveal>
             <p className="flex items-center justify-center gap-2.5 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-brand-400">
               <Motif className="text-brand-500" />
               The standard
@@ -152,12 +117,11 @@ export default function Home() {
               bundle that every DJ receives the same way — so there&apos;s never a missing acapella or
               a mislabeled intro when airtime matters.
             </p>
-            <div className="mt-8 flex justify-center">
-              <ServicePackExplainer />
-            </div>
           </Reveal>
-          <Reveal delay={120}>
-            <AuroraDefs />
+        </div>
+        <ServicePackExplainer />
+        <div className="mx-auto max-w-6xl px-6 pb-20 pt-4">
+          <Reveal>
             <BentoGrid columns={2}>
               <BentoCard
                 colSpan={2}
@@ -166,14 +130,6 @@ export default function Home() {
               >
                 <FormatTabs />
               </BentoCard>
-              {packTiles.map((t) => (
-                <BentoCard
-                  key={t.title}
-                  icon={<AuroraIcon icon={t.icon} />}
-                  title={t.title}
-                  description={t.desc}
-                />
-              ))}
             </BentoGrid>
           </Reveal>
         </div>
@@ -302,17 +258,19 @@ export default function Home() {
       <BackToTop />
 
       {/* 2026-09-29 Round 5: footer spread out — wider container, four columns,
-          roomier padding, bottom bar split into two ends */}
+          roomier padding. Round 7: mobile columns centered so they stop
+          hugging the left edge; bottom bar fully stacked + centered with the
+          Wingu credit at the very bottom. */}
       <footer className="border-t border-paper/10 bg-gradient-to-b from-[#0b0a08] via-[#050505] to-black text-paper">
         <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
-          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.9fr_1fr_1fr_1fr] lg:gap-16">
-            <div>
+          <div className="grid gap-10 text-center sm:grid-cols-2 md:gap-12 lg:grid-cols-[1.9fr_1fr_1fr_1fr] lg:gap-16 lg:text-left">
+            <div className="flex flex-col items-center sm:col-span-2 lg:col-span-1 lg:items-start">
               <Logo tone="light" />
               <p className="mt-5 max-w-sm text-sm leading-relaxed text-paper/60">
                 The standard way to get promo material to the radio, club and digital DJs who
                 break records. One pack per release — every edit, every format, verified delivery.
               </p>
-              <p className="mt-6 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-brand-400">
+              <p className="mt-6 flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-brand-400 lg:justify-start">
                 <Motif className="text-brand-500" />
                 In every crate
               </p>
@@ -348,15 +306,13 @@ export default function Home() {
               </ul>
             </nav>
           </div>
-          <div className="mt-14 flex flex-col items-center gap-4 border-t border-paper/10 pt-8 text-center md:flex-row md:justify-between md:text-left">
-            <div className="flex flex-col items-center gap-2 md:items-start">
-              {/* 2026-09-28 21:35, sponsor credit */}
-              <SponsorCredit size="sm" tone="dark" />
-              <p className="text-sm text-paper/50">© {new Date().getFullYear()} djservicepacks.com — the service pack for every release.</p>
-            </div>
-            {/* 2026-09-28 12:20, Wingu Digital credit — 2026-09-29 Round 6: pushed
-                further down on mobile */}
-            <div className="mt-6 shrink-0 md:mt-0">
+          <div className="mt-14 flex flex-col items-center gap-3 border-t border-paper/10 pt-8 text-center">
+            {/* 2026-09-28 21:35, sponsor credit */}
+            <SponsorCredit size="sm" tone="dark" />
+            <p className="text-sm text-paper/50">© {new Date().getFullYear()} djservicepacks.com — the service pack for every release.</p>
+            {/* 2026-09-28 12:20, Wingu Digital credit — 2026-09-29 Round 7: stacked
+                at the very bottom, centered, with extra air above it */}
+            <div className="mt-6">
               <WinguCredit tone="dark" />
             </div>
           </div>

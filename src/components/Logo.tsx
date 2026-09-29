@@ -27,13 +27,17 @@ export function Logo({
         width={126}
         height={90}
       />
-      <AuroraText
-        colors={["#fcd34d", "#f59e0b", "#fb923c", "#f43f5e"]}
-        speed={0.9}
-        className="text-[17px] font-black uppercase leading-none tracking-tight"
-      >
-        Service Packs
-      </AuroraText>
+      {/* 2026-09-29 Round 7: SERVICE stays solid (paper on dark, ink on light),
+          PACKS runs the aurora gradient */}
+      <span className="text-[17px] font-black uppercase leading-none tracking-tight">
+        <span className={tone === "light" ? "text-paper" : "text-ink"}>Service</span>{" "}
+        <AuroraText
+          colors={["#fcd34d", "#f59e0b", "#fb923c", "#f43f5e"]}
+          speed={0.9}
+        >
+          Packs
+        </AuroraText>
+      </span>
     </Link>
   );
 }
