@@ -331,10 +331,16 @@ export function HeroSection() {
         </div>
 
         {/* Stat strip — trust signals, count up on scroll into view */}
-        <dl
-          className="animate-rise mt-14 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-paper/15 pt-8 md:grid-cols-4"
-          style={{ animationDelay: "420ms" }}
-        >
+        {/* 2026-09-29 Round 11: soft dark field behind the stats so they read on bright slides */}
+        <div className="relative mt-14">
+          <div
+            aria-hidden
+            className="absolute -inset-x-4 -inset-y-6 rounded-[1.75rem] bg-black/60 blur-xl"
+          />
+          <dl
+            className="animate-rise relative grid grid-cols-2 gap-x-6 gap-y-8 border-t border-paper/15 pt-8 md:grid-cols-4"
+            style={{ animationDelay: "420ms" }}
+          >
           {stats.map((s) => (
             <div key={s.label} className="flex flex-col">
               <dt className="order-2 mt-1 text-sm leading-snug text-paper/60">{s.label}</dt>
@@ -344,6 +350,7 @@ export function HeroSection() {
             </div>
           ))}
         </dl>
+        </div>
 
         {/* 2026-09-28 21:35, sponsor credit */}
         <SponsorCredit tone="dark" className="mt-10 border-t border-paper/10 pt-6" />
