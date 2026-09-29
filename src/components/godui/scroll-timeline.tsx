@@ -8,6 +8,10 @@ import {
   useTransform,
 } from "framer-motion";
 import * as React from "react";
+import { AuroraText } from "@/components/godui/aurora-text";
+
+// Round 8 — timeline step numbers carry the warm aurora gradient.
+const NUMBER_COLORS = ["#fcd34d", "#f59e0b", "#fb923c", "#f43f5e"];
 
 export type TimelineEntry = {
   /** Heading for the entry, shown beside the node. */
@@ -84,8 +88,10 @@ const ScrollTimeline = React.forwardRef<HTMLDivElement, ScrollTimelineProps>(
                   <div className="size-3 rounded-full border border-border bg-muted-foreground/30" />
                 </div>
                 <div className="hidden pl-16 md:block">
-                  <h3 className="text-xl font-bold text-muted-foreground md:text-2xl">
-                    {item.date ?? item.title}
+                  <h3 className="text-xl font-bold md:text-2xl">
+                    <AuroraText colors={NUMBER_COLORS} speed={0.8}>
+                      {item.date ?? item.title}
+                    </AuroraText>
                   </h3>
                   {item.date ? (
                     <p className="text-sm text-muted-foreground/70">
@@ -107,8 +113,10 @@ const ScrollTimeline = React.forwardRef<HTMLDivElement, ScrollTimelineProps>(
                     : { duration: 0.4, ease: [0.22, 1, 0.36, 1] }
                 }
               >
-                <h3 className="mb-4 block text-left text-2xl font-bold text-muted-foreground md:hidden">
-                  {item.date ?? item.title}
+                <h3 className="mb-4 block text-left text-2xl font-bold md:hidden">
+                  <AuroraText colors={NUMBER_COLORS} speed={0.8}>
+                    {item.date ?? item.title}
+                  </AuroraText>
                 </h3>
                 {item.content}
               </motion.div>

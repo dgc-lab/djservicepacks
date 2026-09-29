@@ -16,10 +16,10 @@ import { PresenceFacepile, type PresenceUser } from "@/components/godui/presence
 import { HeroSlider, type HeroSlide } from "@/components/HeroSlider";
 
 const slides: HeroSlide[] = [
+  { src: "/images/hero-slider/slider-crates.webp", alt: "", label: "The crates" },
   { src: "/images/hero-slider/slider-gear.webp", alt: "", label: "The gear" },
   { src: "/images/hero-slider/slider-turntables.webp", alt: "", label: "The turntables" },
   { src: "/images/hero-slider/slider-radio.webp", alt: "", label: "The radio station" },
-  { src: "/images/hero-slider/slider-crates.webp", alt: "", label: "The crates" },
 ];
 
 const djUsers: PresenceUser[] = [
