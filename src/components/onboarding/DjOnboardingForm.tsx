@@ -119,13 +119,11 @@ export function DjOnboardingForm() {
   return (
     <div className="overflow-hidden rounded-2xl border border-paper/10 bg-white/[0.04] shadow-2xl backdrop-blur-xl">
       <div className="border-b border-paper/10 px-6 py-5">
-        <div className="flex items-center justify-between gap-3 pr-12">
-          <h3 className="text-lg font-bold text-paper">DJ onboarding</h3>
-          <span className="shrink-0 rounded-full bg-brand-500/15 px-3 py-1 text-xs font-semibold text-brand-300">
-            Free · DJ verification
-          </span>
-        </div>
-        <p className="mt-1 text-sm text-paper/55">
+        <h3 className="pr-10 text-lg font-bold text-paper">DJ onboarding</h3>
+        <span className="mt-2 inline-flex shrink-0 rounded-full bg-brand-500/15 px-3 py-1 text-xs font-semibold text-brand-300">
+          Free · DJ verification
+        </span>
+        <p className="mt-2 text-sm text-paper/55">
           Free registration. Your details are checked by admin before you unlock high-bitrate
           downloads.
         </p>
