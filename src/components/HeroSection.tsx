@@ -7,12 +7,11 @@ import { Settings2, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Motif } from "@/components/Motif";
-import { Reveal } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
 import { SponsorCredit } from "@/components/SponsorCredit";
 import { AuroraText } from "@/components/godui/aurora-text";
 import { PresenceFacepile, type PresenceUser } from "@/components/godui/presence/presence-facepile";
-import { HeroSlider, type HeroSlide } from "@/components/HeroSlider";
+import { HeroSlider, type HeroSlide, type HeroTransition } from "@/components/HeroSlider";
 import { OnboardingModal, type OnboardingKind } from "@/components/onboarding/OnboardingModal";
 
 const slides: HeroSlide[] = [
@@ -49,11 +48,56 @@ const SPEEDS = [
   { id: "brisk", label: "Brisk", ms: 3000 },
 ] as const;
 
+// 2026-09-29 Round 10: hero operator controls, ported from the Prime Time
+// module. Fade is the default; Ken Burns on; grain and parallax off.
+const TRANSITIONS = [
+  { id: "fade", label: "Fade" },
+  { id: "slide", label: "Slide" },
+  { id: "dip", label: "Dip to black" },
+  { id: "punch", label: "Punch-in" },
+] as const;
+
+function ToggleRow({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: boolean;
+  onChange: (v: boolean) => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={() => onChange(!value)}
+      aria-pressed={value}
+      className="mt-2 flex w-full items-center justify-between rounded-lg bg-paper/5 px-3 py-2 text-sm transition-colors hover:bg-paper/10"
+    >
+      <span className="font-medium text-paper/80">{label}</span>
+      <span
+        className={`relative h-5 w-9 shrink-0 rounded-full transition-colors ${
+          value ? "bg-brand-500" : "bg-paper/20"
+        }`}
+      >
+        <span
+          className={`absolute top-0.5 size-4 rounded-full bg-white transition-all ${
+            value ? "left-[18px]" : "left-0.5"
+          }`}
+        />
+      </span>
+    </button>
+  );
+}
+
 export function HeroSection() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [headlineSize, setHeadlineSize] = useState<HeadlineSize>("classic");
   const [autoplay, setAutoplay] = useState(true);
   const [speedId, setSpeedId] = useState<(typeof SPEEDS)[number]["id"]>("steady");
+  const [transition, setTransition] = useState<HeroTransition>("fade");
+  const [kenBurns, setKenBurns] = useState(true);
+  const [filmGrain, setFilmGrain] = useState(false);
+  const [parallax, setParallax] = useState(false);
   // 2026-09-29 Round 9: hero CTAs pop the onboarding forms in a modal over the
   // dark hero instead of navigating away to a separate page.
   const [onboarding, setOnboarding] = useState<OnboardingKind | null>(null);
@@ -67,11 +111,52 @@ export function HeroSection() {
     return () => window.removeEventListener("keydown", onKey);
   }, [settingsOpen]);
 
+  // 2026-09-29 Round 10: hero settings persist through URL parameters, so a
+  // tuned hero is shareable. Hydrated on mount in an effect (not a lazy
+  // initializer) so the server prerender and first client render match —
+  // window is unreadable during SSR. This is intentionally mount-only.
+  /* eslint-disable react-hooks/set-state-in-effect -- mount-only URL hydration, see above */
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const t = q.get("transition");
+    if (t === "fade" || t === "slide" || t === "dip" || t === "punch") setTransition(t);
+    if (q.get("kb") === "0") setKenBurns(false);
+    if (q.get("kb") === "1") setKenBurns(true);
+    if (q.get("grain") === "1") setFilmGrain(true);
+    if (q.get("px") === "1") setParallax(true);
+    if (q.get("autoplay") === "0") setAutoplay(false);
+    const s = q.get("speed");
+    if (s === "relaxed" || s === "steady" || s === "brisk") setSpeedId(s);
+    const h = q.get("headline");
+    if (h === "compact" || h === "classic" || h === "grand") setHeadlineSize(h);
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    q.set("transition", transition);
+    q.set("kb", kenBurns ? "1" : "0");
+    q.set("grain", filmGrain ? "1" : "0");
+    q.set("px", parallax ? "1" : "0");
+    q.set("autoplay", autoplay ? "1" : "0");
+    q.set("speed", speedId);
+    q.set("headline", headlineSize);
+    window.history.replaceState(null, "", `${window.location.pathname}?${q.toString()}`);
+  }, [transition, kenBurns, filmGrain, parallax, autoplay, speedId, headlineSize]);
+
   const speed = SPEEDS.find((s) => s.id === speedId) ?? SPEEDS[1];
 
   return (
     <section className="relative isolate overflow-hidden bg-charcoal text-paper">
-      <HeroSlider slides={slides} autoplay={autoplay} interval={speed.ms} />
+      <HeroSlider
+        slides={slides}
+        autoplay={autoplay}
+        interval={speed.ms}
+        transition={transition}
+        kenBurns={kenBurns}
+        filmGrain={filmGrain}
+        parallax={parallax}
+      />
 
       {/* Settings gear — typography + slider controls */}
       <div className="absolute right-4 top-20 z-20 md:right-8 md:top-24">
@@ -96,7 +181,7 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.97 }}
               transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute right-0 top-14 w-64 rounded-xl border border-paper/15 bg-black/80 p-4 shadow-2xl shadow-black/60 backdrop-blur-md"
+              className="absolute right-0 top-14 max-h-[70vh] w-64 overflow-y-auto rounded-xl border border-paper/15 bg-black/80 p-4 shadow-2xl shadow-black/60 backdrop-blur-md"
             >
               <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-brand-400">
                 Typography
@@ -159,6 +244,34 @@ export function HeroSection() {
                   </button>
                 ))}
               </div>
+
+              <p className="mt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-brand-400">
+                Transition
+              </p>
+              <div className="mt-2 grid grid-cols-2 gap-1 rounded-lg bg-paper/5 p-1">
+                {TRANSITIONS.map((t) => (
+                  <button
+                    key={t.id}
+                    type="button"
+                    onClick={() => setTransition(t.id)}
+                    aria-pressed={transition === t.id}
+                    className={`rounded-md px-2 py-1.5 text-xs font-semibold transition-all ${
+                      transition === t.id
+                        ? "bg-brand-500/25 text-brand-200"
+                        : "text-paper/60 hover:text-paper"
+                    }`}
+                  >
+                    {t.label}
+                  </button>
+                ))}
+              </div>
+
+              <p className="mt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-brand-400">
+                Motion
+              </p>
+              <ToggleRow label="Ken Burns" value={kenBurns} onChange={setKenBurns} />
+              <ToggleRow label="Film grain" value={filmGrain} onChange={setFilmGrain} />
+              <ToggleRow label="Parallax" value={parallax} onChange={setParallax} />
             </motion.div>
           ) : null}
         </AnimatePresence>
