@@ -38,10 +38,10 @@ export function ParallaxBand({ src, eyebrow, title, sub }: ParallaxBandProps) {
             <Motif className="text-brand-500" />
             {eyebrow}
           </p>
-          <p className="mt-3 font-display text-[clamp(1.8rem,4vw,3rem)] leading-tight tracking-tight text-paper">
+          <p className="mt-3 font-display text-[clamp(1.8rem,4vw,3rem)] leading-tight tracking-tight text-paper [text-shadow:0_4px_36px_rgba(0,0,0,0.7)]">
             {title}
           </p>
-          {sub ? <p className="mt-3 text-base leading-relaxed text-paper/65">{sub}</p> : null}
+          {sub ? <p className="mt-3 text-base leading-relaxed text-paper/65 [text-shadow:0_2px_18px_rgba(0,0,0,0.65)]">{sub}</p> : null}
         </Reveal>
       </div>
     </div>

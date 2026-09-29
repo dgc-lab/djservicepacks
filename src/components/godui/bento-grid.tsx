@@ -56,7 +56,7 @@ const itemVariants: Variants = {
 };
 
 const CARD_BASE =
-  "group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card p-6 text-card-foreground shadow-sm [transition:translate_300ms_cubic-bezier(0.3,0.7,0.4,1),box-shadow_300ms_ease] hover:-translate-y-1 hover:shadow-lg motion-reduce:[transition:none] motion-reduce:hover:translate-y-0";
+  "group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card p-6 text-card-foreground shadow-[0_18px_44px_-22px_rgba(0,0,0,0.85)] [transition:translate_300ms_cubic-bezier(0.3,0.7,0.4,1),box-shadow_300ms_ease] hover:-translate-y-1 hover:shadow-[0_28px_64px_-20px_rgba(240,168,33,0.28)] motion-reduce:[transition:none] motion-reduce:hover:translate-y-0";
 
 const CARD_GLOW =
   "pointer-events-none absolute inset-0 opacity-0 [transition:opacity_400ms_ease] group-hover:opacity-100 motion-reduce:[transition:none] [background:radial-gradient(280px_circle_at_var(--x,50%)_var(--y,50%),color-mix(in_oklch,var(--primary)_18%,transparent),transparent_70%)]";

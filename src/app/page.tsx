@@ -257,7 +257,7 @@ export default function Home() {
             </h2>
           </Reveal>
           <Reveal delay={100} className="mt-10">
-            <Accordion type="single" defaultValue="what" items={faqItems} className="bg-paper/[0.02]" />
+            <Accordion type="single" defaultValue="what" items={faqItems} className="rounded-xl bg-paper/[0.02] shadow-[0_24px_60px_-32px_rgba(0,0,0,0.9)]" />
           </Reveal>
         </div>
       </section>
@@ -301,17 +301,18 @@ export default function Home() {
 
       <BackToTop />
 
-      {/* 2026-09-29 Round 4: dark black gradient footer */}
+      {/* 2026-09-29 Round 5: footer spread out — wider container, four columns,
+          roomier padding, bottom bar split into two ends */}
       <footer className="border-t border-paper/10 bg-gradient-to-b from-[#0b0a08] via-[#050505] to-black text-paper">
-        <div className="mx-auto max-w-6xl px-6 py-14">
-          <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.9fr_1fr_1fr_1fr] lg:gap-16">
             <div>
               <Logo tone="light" />
-              <p className="mt-4 max-w-xs text-sm leading-relaxed text-paper/60">
+              <p className="mt-5 max-w-sm text-sm leading-relaxed text-paper/60">
                 The standard way to get promo material to the radio, club and digital DJs who
-                break records.
+                break records. One pack per release — every edit, every format, verified delivery.
               </p>
-              <p className="mt-5 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-brand-400">
+              <p className="mt-6 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-brand-400">
                 <Motif className="text-brand-500" />
                 In every crate
               </p>
@@ -320,31 +321,41 @@ export default function Home() {
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-paper/40">
                 Explore
               </p>
-              <ul className="mt-4 space-y-2.5 text-sm font-medium">
+              <ul className="mt-5 space-y-3 text-sm font-medium">
                 <li><Link href="#standard" className="text-paper/70 transition-colors hover:text-brand-400">The standard</Link></li>
                 <li><Link href="#for-djs" className="text-paper/70 transition-colors hover:text-brand-400">For DJs</Link></li>
-                <li><Link href="#latest" className="text-paper/70 transition-colors hover:text-brand-400">Latest releases</Link></li>
-                <li><Link href="#crates" className="text-paper/70 transition-colors hover:text-brand-400">Dig the crates</Link></li>
                 <li><Link href="#faq" className="text-paper/70 transition-colors hover:text-brand-400">FAQ</Link></li>
+              </ul>
+            </nav>
+            <nav aria-label="Library">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-paper/40">
+                Library
+              </p>
+              <ul className="mt-5 space-y-3 text-sm font-medium">
+                <li><Link href="#latest" className="text-paper/70 transition-colors hover:text-brand-400">Latest releases</Link></li>
+                <li><Link href="/releases" className="text-paper/70 transition-colors hover:text-brand-400">All releases</Link></li>
+                <li><Link href="#crates" className="text-paper/70 transition-colors hover:text-brand-400">Dig the crates</Link></li>
               </ul>
             </nav>
             <nav aria-label="Get started">
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-paper/40">
                 Get started
               </p>
-              <ul className="mt-4 space-y-2.5 text-sm font-medium">
+              <ul className="mt-5 space-y-3 text-sm font-medium">
                 <li><Link href="/onboarding/artist" className="text-paper/70 transition-colors hover:text-brand-400">Upload a service pack</Link></li>
                 <li><Link href="/onboarding/dj" className="text-paper/70 transition-colors hover:text-brand-400">DJ verification</Link></li>
                 <li><Link href="/login" className="text-paper/70 transition-colors hover:text-brand-400">Sign in</Link></li>
               </ul>
             </nav>
           </div>
-          <div className="mt-12 flex flex-col items-center gap-3 border-t border-paper/10 pt-6 text-center">
-            {/* 2026-09-28 21:35, sponsor credit */}
-            <SponsorCredit size="sm" tone="dark" />
-            <p className="text-sm text-paper/50">© {new Date().getFullYear()} djservicepacks.com — the service pack for every release.</p>
+          <div className="mt-14 flex flex-col items-center gap-4 border-t border-paper/10 pt-8 text-center md:flex-row md:justify-between md:text-left">
+            <div className="flex flex-col items-center gap-2 md:items-start">
+              {/* 2026-09-28 21:35, sponsor credit */}
+              <SponsorCredit size="sm" tone="dark" />
+              <p className="text-sm text-paper/50">© {new Date().getFullYear()} djservicepacks.com — the service pack for every release.</p>
+            </div>
             {/* 2026-09-28 12:20, Wingu Digital credit */}
-            <WinguCredit className="mt-1" tone="dark" />
+            <WinguCredit className="shrink-0" tone="dark" />
           </div>
         </div>
       </footer>

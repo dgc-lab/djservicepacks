@@ -66,7 +66,7 @@ export async function LatestReleases() {
             <li key={r.releaseId}>
               <Link
                 href={`/releases/${r.releaseId}`}
-                className="group block overflow-hidden rounded-lg border border-paper/10 bg-paper/[0.04] transition-all hover:-translate-y-0.5 hover:border-brand-500/40"
+                className="group block overflow-hidden rounded-lg border border-paper/10 bg-paper/[0.04] shadow-[0_16px_40px_-22px_rgba(0,0,0,0.85)] transition-all hover:-translate-y-0.5 hover:border-brand-500/40 hover:shadow-[0_24px_56px_-20px_rgba(240,168,33,0.25)]"
               >
                 <div className="relative aspect-square bg-charcoal">
                   {r.hasCover ? (

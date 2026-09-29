@@ -77,7 +77,7 @@ export function HeroSection() {
           onClick={() => setSettingsOpen((v) => !v)}
           aria-label={settingsOpen ? "Close hero settings" : "Open hero settings"}
           aria-expanded={settingsOpen}
-          className={`flex size-11 items-center justify-center rounded-full border backdrop-blur-sm transition-all active:scale-95 ${
+          className={`flex size-11 items-center justify-center rounded-full border shadow-[0_10px_28px_-10px_rgba(0,0,0,0.85)] backdrop-blur-sm transition-all active:scale-95 ${
             settingsOpen
               ? "border-brand-400/70 bg-brand-500/20 text-brand-300"
               : "border-paper/20 bg-black/45 text-paper/80 hover:border-brand-400/50 hover:text-paper"
@@ -169,7 +169,7 @@ export function HeroSection() {
           For labels &amp; artists
         </p>
         <h1
-          className={`animate-rise mt-6 max-w-5xl font-display leading-[1.02] tracking-tight ${HEADLINE_CLASS[headlineSize]}`}
+          className={`animate-rise mt-6 max-w-5xl font-display leading-[1.02] tracking-tight [text-shadow:0_4px_44px_rgba(0,0,0,0.7)] ${HEADLINE_CLASS[headlineSize]}`}
           style={{ animationDelay: "90ms" }}
         >
           Your music, in{" "}
@@ -178,7 +178,7 @@ export function HeroSection() {
           </AuroraText>
         </h1>
         <p
-          className="animate-rise mt-6 max-w-2xl text-lg leading-relaxed text-paper/70"
+          className="animate-rise mt-6 max-w-2xl text-lg leading-relaxed text-paper/70 [text-shadow:0_2px_20px_rgba(0,0,0,0.65)]"
           style={{ animationDelay: "180ms" }}
         >
           DJ Service Packs is the standard way to get promo material to the radio, club and digital
@@ -221,7 +221,7 @@ export function HeroSection() {
           {stats.map((s) => (
             <div key={s.label} className="flex flex-col">
               <dt className="order-2 mt-1 text-sm leading-snug text-paper/60">{s.label}</dt>
-              <dd className="order-1 font-display text-4xl text-brand-400 md:text-5xl">
+              <dd className="order-1 font-display text-4xl text-brand-400 [text-shadow:0_0_28px_rgba(240,168,33,0.35)] md:text-5xl">
                 <CountUp to={s.to} />
               </dd>
             </div>
