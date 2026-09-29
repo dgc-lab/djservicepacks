@@ -182,17 +182,19 @@ export function HeroSlider({
           ))}
         </div>
 
-        {/* Uniform dim over every slide — the moody treatment from the approved screenshots (2026-09-29 Round 12) */}
-        <div aria-hidden className="absolute inset-0 bg-black/40" />
-
         {/* Dip-to-black overlay */}
         <div aria-hidden className={cn("fx-dip", dipping && "is-dipping")} />
         {/* Film grain overlay */}
         <div aria-hidden className="fx-grain" />
 
-        {/* Contrast gradients for the headline (kept from the old static hero bg) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal/40" />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-charcoal to-transparent" />
+        {/*
+          Contrast gradients for the headline (kept from the old static hero bg).
+          2026-09-29 Round 13: these need z-[3] — the active slide sits at z-1/z-2
+          (Round 10's CSS transition rewrite), which was burying the gradients
+          and washing the hero out. They must paint above the slides.
+        */}
+        <div className="absolute inset-0 z-[3] bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal/40" />
+        <div className="absolute inset-x-0 bottom-0 z-[3] h-24 bg-gradient-to-t from-charcoal to-transparent" />
       </div>
 
       {/* Controls layer — above the hero content, clicks pass through except on buttons */}
