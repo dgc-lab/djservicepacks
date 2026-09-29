@@ -1,12 +1,11 @@
 import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { SiteNav } from "@/components/SiteNav";
+import { HeroSection } from "@/components/HeroSection";
+import { ParallaxBand } from "@/components/ParallaxBand";
 import { Logo } from "@/components/Logo";
 import { BackToTop } from "@/components/BackToTop";
 import { Motif } from "@/components/Motif";
 import { Reveal } from "@/components/Reveal";
-import { CountUp } from "@/components/CountUp";
 import { ServicePackExplainer } from "@/components/ServicePackExplainer";
 import { LatestReleases } from "@/components/LatestReleases";
 import { WinguCredit } from "@/components/WinguCredit";
@@ -16,7 +15,6 @@ import { AuroraText } from "@/components/godui/aurora-text";
 import { BentoCard, BentoGrid } from "@/components/godui/bento-grid";
 import { ScrollTimeline } from "@/components/godui/scroll-timeline";
 import { Accordion } from "@/components/godui/accordion";
-import { PresenceFacepile, type PresenceUser } from "@/components/godui/presence/presence-facepile";
 import { LiquidGlassCard } from "@/components/godui/liquid-glass-card";
 import { GradientBackground } from "@/components/godui/gradient-background";
 import { FormatTabs } from "@/components/FormatTabs";
@@ -95,13 +93,6 @@ const faqItems = [
   },
 ];
 
-const djUsers: PresenceUser[] = [
-  { id: "mira", name: "DJ Mira", avatar: "/images/djs/dj-mira.webp", status: "active" },
-  { id: "kwest", name: "DJ Kwest", avatar: "/images/djs/dj-kwest.webp", status: "active" },
-  { id: "luna", name: "DJ Luna", avatar: "/images/djs/dj-luna.webp", status: "typing" },
-  { id: "paco", name: "DJ Paco", avatar: "/images/djs/dj-paco.webp", status: "idle" },
-];
-
 // 2026-09-29 Round 3: larger aurora-gradient icons for the pack-contents bento tiles.
 // The gradient def is rendered once per section; each icon strokes through it.
 function AuroraIcon({ icon: Icon }: { icon: LucideIcon }) {
@@ -128,106 +119,13 @@ function AuroraDefs() {
   );
 }
 
-const stats = [
-  { to: 6, label: "edits in every pack" },
-  { to: 3, label: "formats — WAV · AIFF · 320 MP3" },
-  { to: 2, label: "sides of the crate: labels & DJs" },
-  { to: 1, label: "standard pack format" },
-];
-
 export default function Home() {
   return (
     <main className="flex-1">
       <SiteNav />
 
-      {/* Hero — label/artist-first */}
-      {/* 2026-09-28 15:25, studio photo as hero background (darkened left for text contrast) */}
-      <section className="relative isolate overflow-hidden bg-charcoal text-paper">
-        <Image
-          src="/images/studio.jpg"
-          alt=""
-          fill
-          preload
-          sizes="100vw"
-          className="-z-10 object-cover object-[70%_30%]"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal/40"
-        />
-        <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-charcoal to-transparent" />
-
-        {/* 2026-09-29 Round 2: tighter top, roomier headline; aurora on "every DJ's crate" */}
-        <div className="mx-auto max-w-6xl px-6 pb-20 pt-24 md:pt-28">
-          {/* Text-only eyebrow: motif mark + mono label, never a pill */}
-          <p className="animate-rise flex items-center gap-2.5 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-brand-400">
-            <Motif className="h-4 w-4 text-brand-500" />
-            For labels &amp; artists
-          </p>
-          <h1
-            className="animate-rise mt-6 max-w-5xl font-display text-[clamp(3.2rem,8.5vw,5.5rem)] leading-[1.02] tracking-tight"
-            style={{ animationDelay: "90ms" }}
-          >
-            Your music, in{" "}
-            <AuroraText colors={["#fcd34d", "#f59e0b", "#fb923c", "#f43f5e"]} speed={0.9}>
-              every DJ&apos;s crate.
-            </AuroraText>
-          </h1>
-          <p
-            className="animate-rise mt-6 max-w-2xl text-lg leading-relaxed text-paper/70"
-            style={{ animationDelay: "180ms" }}
-          >
-            DJ Service Packs is the standard way to get promo material to the radio, club and digital
-            DJs who break records. Submit one complete pack per release — every edit, the EPK, cover
-            art — and verified DJs download it their way.
-          </p>
-          <div
-            className="animate-rise mt-10 flex flex-wrap items-center gap-4"
-            style={{ animationDelay: "270ms" }}
-          >
-            <Button size="lg">
-              <Link href="/onboarding/artist">Get started as a label / artist</Link>
-            </Button>
-            <Link
-              href="/onboarding/dj"
-              className="inline-flex h-12 items-center justify-center rounded-md border border-paper/25 px-6 text-base font-semibold text-paper transition-all hover:bg-paper/10 active:scale-[0.98]"
-            >
-              DJ? Get verified — free
-            </Link>
-          </div>
-          <p
-            className="animate-rise mt-6 text-sm text-paper/50"
-            style={{ animationDelay: "340ms" }}
-          >
-            DJ onboarding is free. Artists &amp; labels start on a free tier and scale.
-          </p>
-          <div
-            className="animate-rise mt-8 flex items-center gap-4"
-            style={{ animationDelay: "400ms" }}
-          >
-            <PresenceFacepile users={djUsers} max={5} />
-            <p className="text-sm text-paper/60">Made for DJs digging the crates</p>
-          </div>
-
-          {/* Stat strip — trust signals, count up on scroll into view */}
-          <dl
-            className="animate-rise mt-14 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-paper/15 pt-8 md:grid-cols-4"
-            style={{ animationDelay: "420ms" }}
-          >
-            {stats.map((s) => (
-              <div key={s.label} className="flex flex-col">
-                <dt className="order-2 mt-1 text-sm leading-snug text-paper/60">{s.label}</dt>
-                <dd className="order-1 font-display text-4xl text-brand-400 md:text-5xl">
-                  <CountUp to={s.to} />
-                </dd>
-              </div>
-            ))}
-          </dl>
-
-          {/* 2026-09-28 21:35, sponsor credit */}
-          <SponsorCredit tone="dark" className="mt-10 border-t border-paper/10 pt-6" />
-        </div>
-      </section>
+      {/* Hero — 2026-09-29 Round 4: image slider bg + settings (typography, slider) */}
+      <HeroSection />
 
       {/* 2026-09-27 01:20, latest live releases (hidden when there are none) */}
       <div id="latest" className="scroll-mt-20">
@@ -237,20 +135,24 @@ export default function Home() {
       {/* What's in a service pack — 2026-09-29 Round 2: dark amber/charcoal, no white */}
       <section id="standard" className="section-dark scroll-mt-20 text-paper">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 lg:grid-cols-2 lg:items-center">
-          <Reveal>
-            <p className="flex items-center gap-2.5 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-brand-400">
+          {/* 2026-09-29 Round 4: centered header, aurora on the closing line */}
+          <Reveal className="text-center">
+            <p className="flex items-center justify-center gap-2.5 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-brand-400">
               <Motif className="text-brand-500" />
               The standard
             </p>
             <h2 className="mt-3 font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.02] tracking-tight text-paper">
-              One pack. Every edit. No more hunting files.
+              One pack. Every edit.{" "}
+              <AuroraText colors={["#fcd34d", "#f59e0b", "#fb923c", "#f43f5e"]} speed={0.9}>
+                No more hunting files.
+              </AuroraText>
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-paper/65">
+            <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-paper/65">
               Stop e-mailing 12 random attachments. A service pack is a single, organized release
               bundle that every DJ receives the same way — so there&apos;s never a missing acapella or
               a mislabeled intro when airtime matters.
             </p>
-            <div className="mt-8">
+            <div className="mt-8 flex justify-center">
               <ServicePackExplainer />
             </div>
           </Reveal>
@@ -280,13 +182,17 @@ export default function Home() {
       {/* How it works — 2026-09-29 Round 2: dark amber/charcoal; timeline component lands here */}
       <section id="for-djs" className="section-dark scroll-mt-20 border-y border-paper/10 text-paper">
         <div className="mx-auto max-w-6xl px-6 py-20">
-          <Reveal className="max-w-2xl">
-            <p className="flex items-center gap-2.5 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-brand-400">
+          {/* 2026-09-29 Round 4: centered header, aurora on the closing line */}
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <p className="flex items-center justify-center gap-2.5 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-brand-400">
               <Motif className="text-brand-500" />
               Made for the crate
             </p>
             <h2 className="mt-3 font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.02] tracking-tight text-paper">
-              We built it for the DJs who break records.
+              We built it for the DJs who{" "}
+              <AuroraText colors={["#fcd34d", "#f59e0b", "#fb923c", "#f43f5e"]} speed={0.9}>
+                break records.
+              </AuroraText>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-paper/65">
               Radio programmers, club residents and stream DJs sign up for free, verify their station
@@ -305,13 +211,17 @@ export default function Home() {
       {/* Dig the crates — 2026-09-29 Round 2: GodUI filter-bar playground */}
       <section id="crates" className="section-dark scroll-mt-20 text-paper">
         <div className="mx-auto max-w-6xl px-6 py-20">
-          <Reveal className="max-w-2xl">
-            <p className="flex items-center gap-2.5 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-brand-400">
+          {/* 2026-09-29 Round 4: centered header, aurora on the closing line */}
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <p className="flex items-center justify-center gap-2.5 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-brand-400">
               <Motif className="text-brand-500" />
               Dig the crates
             </p>
             <h2 className="mt-3 font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.02] tracking-tight text-paper">
-              Take the crates for a spin.
+              Take the crates{" "}
+              <AuroraText colors={["#fcd34d", "#f59e0b", "#fb923c", "#f43f5e"]} speed={0.9}>
+                for a spin.
+              </AuroraText>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-paper/65">
               A taste of the DJ side — filter the demo shelf by genre and format. This is the same
@@ -322,6 +232,13 @@ export default function Home() {
             <CrateDig />
           </div>
         </div>
+        {/* 2026-09-29 Round 4: parallax image band — vinyl crates, full-bleed */}
+        <ParallaxBand
+          src="/images/hero-slider/slider-crates.webp"
+          eyebrow="From the crates"
+          title="Deep crates, loud rooms."
+          sub="Every pack starts with records like these — dug, cleaned, and cut for the club."
+        />
       </section>
 
       {/* FAQ — 2026-09-29 Round 2: GodUI accordion */}
@@ -333,7 +250,10 @@ export default function Home() {
               Questions
             </p>
             <h2 className="mt-3 font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.02] tracking-tight text-paper">
-              Asked all the time.
+              Asked{" "}
+              <AuroraText colors={["#fcd34d", "#f59e0b", "#fb923c", "#f43f5e"]} speed={0.9}>
+                all the time.
+              </AuroraText>
             </h2>
           </Reveal>
           <Reveal delay={100} className="mt-10">
@@ -359,7 +279,10 @@ export default function Home() {
                 In every crate
               </p>
               <h2 className="mx-auto mt-4 max-w-2xl font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.02] tracking-tight text-paper">
-                Get your next release into DJ hands, the right way.
+                Get your next release into DJ hands,{" "}
+                <AuroraText colors={["#fcd34d", "#f59e0b", "#fb923c", "#f43f5e"]} speed={0.9}>
+                  the right way.
+                </AuroraText>
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-paper/65">
                 One upload, every edit, every format — in front of the verified DJs who break
@@ -378,8 +301,8 @@ export default function Home() {
 
       <BackToTop />
 
-      {/* 2026-09-29 Round 2: reimagined footer — link columns, brand block, credits */}
-      <footer className="border-t border-paper/10 bg-charcoal text-paper">
+      {/* 2026-09-29 Round 4: dark black gradient footer */}
+      <footer className="border-t border-paper/10 bg-gradient-to-b from-[#0b0a08] via-[#050505] to-black text-paper">
         <div className="mx-auto max-w-6xl px-6 py-14">
           <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
             <div>
