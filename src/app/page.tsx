@@ -354,8 +354,11 @@ export default function Home() {
               <SponsorCredit size="sm" tone="dark" />
               <p className="text-sm text-paper/50">© {new Date().getFullYear()} djservicepacks.com — the service pack for every release.</p>
             </div>
-            {/* 2026-09-28 12:20, Wingu Digital credit */}
-            <WinguCredit className="shrink-0" tone="dark" />
+            {/* 2026-09-28 12:20, Wingu Digital credit — 2026-09-29 Round 6: pushed
+                further down on mobile */}
+            <div className="mt-6 shrink-0 md:mt-0">
+              <WinguCredit tone="dark" />
+            </div>
           </div>
         </div>
       </footer>

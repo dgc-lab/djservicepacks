@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { AuroraText } from "@/components/godui/aurora-text";
 
 /**
  * DJ Service Packs brand lockup: the golden D/J turntable mark + wordmark.
- * The mark already reads "DJ", so the wordmark carries "SERVICE PACKS".
- * `tone="light"` is for dark backgrounds (paper text), `"dark"` for light
- * surfaces (ink text). The gold mark reads on either.
+ * The mark already reads "DJ", so the wordmark carries "SERVICE PACKS" —
+ * 2026-09-29 Round 6: the wordmark runs the aurora gradient everywhere it appears.
+ * `tone` is kept for API compatibility.
  */
 export function Logo({
   tone = "dark",
@@ -26,14 +27,13 @@ export function Logo({
         width={126}
         height={90}
       />
-      <span
-        className={cn(
-          "text-[17px] font-black uppercase tracking-tight leading-none",
-          tone === "light" ? "text-paper" : "text-ink"
-        )}
+      <AuroraText
+        colors={["#fcd34d", "#f59e0b", "#fb923c", "#f43f5e"]}
+        speed={0.9}
+        className="text-[17px] font-black uppercase leading-none tracking-tight"
       >
         Service Packs
-      </span>
+      </AuroraText>
     </Link>
   );
 }
