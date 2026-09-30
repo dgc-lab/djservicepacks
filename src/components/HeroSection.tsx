@@ -316,6 +316,21 @@ export function HeroSection() {
             DJ? Get verified — free
           </button>
         </div>
+
+        {/* 2026-09-29 Round 14: Tony's branding — SERVICE PACKS wordmark + brought-to-you-by Official Priorities, prominent under the CTAs */}
+        <div
+          className="animate-rise mt-8 flex flex-wrap items-center gap-x-5 gap-y-3"
+          style={{ animationDelay: "300ms" }}
+        >
+          <span className="text-[15px] font-black uppercase leading-none tracking-[0.14em]">
+            <span className="text-paper">Service</span>{" "}
+            <AuroraText colors={["#fcd34d", "#f59e0b", "#fb923c", "#f43f5e"]} speed={0.9}>
+              Packs
+            </AuroraText>
+          </span>
+          <span aria-hidden className="h-5 w-px bg-paper/20" />
+          <SponsorCredit tone="dark" size="sm" />
+        </div>
         <p
           className="animate-rise mt-6 text-sm text-paper/50"
           style={{ animationDelay: "340ms" }}
@@ -345,8 +360,6 @@ export function HeroSection() {
           ))}
         </dl>
 
-        {/* 2026-09-28 21:35, sponsor credit */}
-        <SponsorCredit tone="dark" className="mt-10 border-t border-paper/10 pt-6" />
       </div>
       <OnboardingModal open={onboarding} onClose={() => setOnboarding(null)} />
     </section>
